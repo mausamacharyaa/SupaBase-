@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'home_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-Future <main> () async {
-  await Supabase.initialize(
-    url: 'https://pyotzmzfprlkerreespm.supabase.co',
-    anonKey: 'sb_publishable_gHzdU8ozZof5JtWOYQxndg_QtAf-Ehk',
-  );
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
+  await Supabase.initialize(url: dotenv.env['SUPABASE_URL']!, publishableKey: dotenv.env['PUBLISHIABLE_KEY']!);
   runApp(const MyApp());
 }
 
